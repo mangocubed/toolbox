@@ -1,0 +1,16 @@
+name: toolbox
+publish_to: none
+version: 0.0.0-alpha.0
+
+environment:
+    sdk: ^3.10.7
+
+dependencies:
+    flutter:
+        sdk: flutter
+
+    flutter_secure_storage: ^10.0.0
+    http: ^1.6.0
+    oauth2_client: ^4.2.4
+    restart_app: ^1.7.3
+    url_launcher: ^6.3.2
