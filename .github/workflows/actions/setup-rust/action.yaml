@@ -1,0 +1,16 @@
+name: Setup Rust
+description: Setup Rust environment with dependencies
+
+runs:
+    using: composite
+    steps:
+        - name: Change directory to rust
+          shell: bash
+          run: cd rust
+        - uses: actions/cache@v5
+          with:
+              path: |
+                  ~/.cargo/
+                  ~/.rustup/
+                  target/
+              key: ${{ runner.os }}-cargo-{{ hashFiles('**/Cargo.lock') }}
