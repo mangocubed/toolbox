@@ -3,6 +3,9 @@ description: Setup Flutter environment with dependencies
 
 runs:
     using: composite
+    defaults:
+        run:
+            working-directory: ./flutter
     steps:
         - uses: subosito/flutter-action@v2
           with:
