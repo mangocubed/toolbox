@@ -9,6 +9,9 @@ env:
 jobs:
     rust_tests:
         runs-on: ubuntu-24.04
+        defaults:
+            run:
+                working-directory: ./rust
         steps:
             - uses: actions/checkout@v6
             - uses: taiki-e/install-action@nextest
