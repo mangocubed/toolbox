@@ -1,0 +1,20 @@
+name: Tests
+
+on:
+    workflow_call:
+
+env:
+    CARGO_TERM_COLOR: always
+
+jobs:
+    rust_tests:
+        runs-on: ubuntu-24.04
+        defaults:
+            run:
+                working-directory: ./rust
+        steps:
+            - uses: actions/checkout@v6
+            - uses: taiki-e/install-action@nextest
+            - uses: ./.github/actions/setup-rust
+            - name: Run all unit tests
+              run: cargo nextest run --no-tests pass

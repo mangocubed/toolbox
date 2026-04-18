@@ -3,7 +3,7 @@ publish_to: none
 version: 0.0.0-alpha.0
 
 environment:
-    sdk: ^3.10.7
+    sdk: ^3.11.4
 
 dependencies:
     flutter:
@@ -14,3 +14,9 @@ dependencies:
     oauth2_client: ^4.2.4
     restart_app: ^1.7.3
     url_launcher: ^6.3.2
+
+dev_dependencies:
+    flutter_test:
+        sdk: flutter
+
+    flutter_lints: ^6.0.0
