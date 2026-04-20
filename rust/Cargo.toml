@@ -5,6 +5,11 @@ edition = "2024"
 
 [dependencies]
 async-graphql = "8.0.0-rc.4"
+cached = { version = "0.59.0", features = [
+    "async",
+    "redis_store",
+    "redis_tokio",
+] }
 chrono = { version = "0.4", features = ["serde"] }
 envconfig = "0.11"
 reqwest = { version = "0.13", features = ["json"] }
