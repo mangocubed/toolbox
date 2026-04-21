@@ -9,8 +9,11 @@ pub(crate) static IDENTITY_CONFIG: LazyLock<IdentityConfig> =
     LazyLock::new(|| IdentityConfig::init_from_env().unwrap());
 pub(crate) static SENTRY_CONFIG: LazyLock<SentryConfig> = LazyLock::new(|| SentryConfig::init_from_env().unwrap());
 
+#[cfg(feature = "mailer")]
+pub static MAILER_CONFIG: LazyLock<MailerConfig> = LazyLock::new(|| MailerConfig::init_from_env().unwrap());
+
 #[derive(Envconfig)]
-pub struct CacheConfig {
+pub(crate) struct CacheConfig {
     #[envconfig(from = "CACHE_REDIS_URL", default = "redis://127.0.0.1:6379/0")]
     pub redis_url: String,
     #[envconfig(from = "CACHE_TTL_SECS", default = "3600")]
@@ -26,11 +29,30 @@ impl CacheConfig {
 #[derive(Envconfig)]
 pub(crate) struct IdentityConfig {
     #[envconfig(from = "IDENTITY_API_URL", default = "https://api.id.mango3.app/")]
-    pub(crate) api_url: Url,
+    pub api_url: Url,
+}
+
+#[cfg(feature = "mailer")]
+#[derive(Envconfig)]
+pub struct MailerConfig {
+    #[envconfig(from = "MAILER_ENABLE", default = "false")]
+    pub(crate) enable: bool,
+    #[envconfig(from = "MAILER_SENDER_ADDRESS", default = "Mango³ dev <no-reply@localhost>")]
+    pub(crate) sender_address: String,
+    #[envconfig(from = "MAILER_SMTP_ADDRESS", default = "localhost")]
+    pub(crate) smtp_address: String,
+    #[envconfig(from = "MAILER_SMTP_PASSWORD", default = "")]
+    pub(crate) smtp_password: String,
+    #[envconfig(from = "MAILER_SMTP_SECURITY", default = "none")]
+    pub(crate) smtp_security: String,
+    #[envconfig(from = "MAILER_SMTP_USERNAME", default = "")]
+    pub(crate) smtp_username: String,
+    #[envconfig(from = "MAILER_SUPPORT_EMAIL_ADDRESS", default = "support@localhost")]
+    pub support_email_address: String,
 }
 
 #[derive(Envconfig)]
-pub struct SentryConfig {
+pub(crate) struct SentryConfig {
     #[envconfig(from = "SENTRY_DSN")]
     pub dsn: Option<String>,
     #[envconfig(from = "SENTRY_TRACES_SAMPLE_RATE", default = "1.0")]
