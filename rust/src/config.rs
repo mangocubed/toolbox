@@ -2,13 +2,16 @@ use std::sync::LazyLock;
 use std::time::Duration;
 
 use envconfig::Envconfig;
+
+#[cfg(feature = "identity-client")]
 use url::Url;
 
 pub(crate) static CACHE_CONFIG: LazyLock<CacheConfig> = LazyLock::new(|| CacheConfig::init_from_env().unwrap());
-pub(crate) static IDENTITY_CONFIG: LazyLock<IdentityConfig> =
-    LazyLock::new(|| IdentityConfig::init_from_env().unwrap());
 pub(crate) static SENTRY_CONFIG: LazyLock<SentryConfig> = LazyLock::new(|| SentryConfig::init_from_env().unwrap());
 
+#[cfg(feature = "identity-client")]
+pub(crate) static IDENTITY_CONFIG: LazyLock<IdentityConfig> =
+    LazyLock::new(|| IdentityConfig::init_from_env().unwrap());
 #[cfg(feature = "mailer")]
 pub static MAILER_CONFIG: LazyLock<MailerConfig> = LazyLock::new(|| MailerConfig::init_from_env().unwrap());
 
@@ -26,6 +29,7 @@ impl CacheConfig {
     }
 }
 
+#[cfg(feature = "identity-client")]
 #[derive(Envconfig)]
 pub(crate) struct IdentityConfig {
     #[envconfig(from = "IDENTITY_API_URL", default = "https://api.id.mango3.app/")]
