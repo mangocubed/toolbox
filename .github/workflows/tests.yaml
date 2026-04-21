@@ -17,4 +17,4 @@ jobs:
             - uses: taiki-e/install-action@nextest
             - uses: ./.github/actions/setup-rust
             - name: Run all unit tests
-              run: cargo nextest run --no-tests pass
+              run: cargo nextest run --all-features --no-tests pass

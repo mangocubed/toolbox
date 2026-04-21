@@ -4,14 +4,19 @@ version = "0.0.0-alpha.0"
 edition = "2024"
 
 [dependencies]
+anyhow = { version = "1.0", optional = true }
 async-graphql = "8.0.0-rc.4"
-cached = { version = "0.59.0", features = [
+cached = { version = "0.59", features = [
     "async",
     "redis_store",
     "redis_tokio",
 ] }
 chrono = { version = "0.4", features = ["serde"] }
 envconfig = "0.11"
+lettre = { version = "0.11", features = [
+    "smtp-transport",
+    "tokio1-native-tls",
+], optional = true }
 reqwest = { version = "0.13", features = ["json"] }
 sentry = { version = "0.47", features = ["logs", "tracing"] }
 serde = { version = "1.0", features = ["derive"] }
@@ -19,3 +24,6 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 url = { version = "2.5", features = ["serde"] }
 uuid = { version = "1.23", features = ["serde"] }
+
+[features]
+mailer = ["dep:anyhow", "dep:lettre"]

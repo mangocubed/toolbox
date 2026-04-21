@@ -18,7 +18,7 @@ jobs:
             - name: Check with cargo-fmt
               run: cargo fmt --all --check
             - name: Check with cargo-clippy
-              run: cargo clippy -- -D warnings
+              run: cargo clippy --all-features -- -D warnings
 
     check_flutter:
         runs-on: ubuntu-24.04
