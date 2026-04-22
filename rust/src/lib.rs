@@ -1,5 +1,6 @@
 pub mod cache;
 pub mod config;
+pub mod constants;
 pub mod pagination;
 pub mod tracing;
 
@@ -9,3 +10,5 @@ pub mod graphql;
 pub mod identity_client;
 #[cfg(feature = "mailer")]
 pub mod mailer;
+#[cfg(feature = "validator")]
+pub mod validator;

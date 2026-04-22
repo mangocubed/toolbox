@@ -20,12 +20,15 @@ lettre = { version = "0.11", features = [
 reqwest = { version = "0.13", features = ["json"], optional = true }
 sentry = { version = "0.47", features = ["logs", "tracing"] }
 serde = { version = "1.0", features = ["derive"] }
+sqlx = { version = "0.8", optional = true }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 url = { version = "2.5", features = ["serde"], optional = true }
 uuid = { version = "1.23", features = ["serde"] }
+validator = { version = "0.20", optional = true }
 
 [features]
 graphql = ["dep:async-graphql"]
 identity-client = ["dep:reqwest", "dep:chrono", "dep:url"]
 mailer = ["dep:anyhow", "dep:lettre"]
+validator = ["dep:sqlx", "dep:validator"]
