@@ -119,6 +119,16 @@ class IdentityClient {
     }
   }
 
+  static Future<void> revoke() async {
+    if (!hasAccessToken) {
+      return;
+    }
+
+    await _oauth2Client.revokeAccessToken(_accessToken!, clientId: Config.identityClientId);
+    await _deleteAccessToken();
+    await Restart.restartApp();
+  }
+
   /// Checks if the app is authorized and restarts if not.
   static Future<void> checkAuthorization() async {
     // Restart the app if the access token has changed on another instance.
@@ -127,13 +137,13 @@ class IdentityClient {
     }
 
     // Restart the app if the access token is not valid.
-    if (!await isAuthorized() && hasAccessToken()) {
+    if (!await isAuthorized() && hasAccessToken) {
       await _deleteAccessToken();
       await Restart.restartApp();
     }
   }
 
-  static String? getBearer() {
+  static String? get bearer {
     final token = _accessToken?.accessToken ?? Config.identityClientToken;
 
     if (token.isEmpty) {
@@ -149,21 +159,21 @@ class IdentityClient {
     }
   }
 
-  static bool hasAccessToken() {
+  static bool get hasAccessToken {
     return _accessToken != null;
   }
 
   static Future<bool> isAuthorized() async {
     final response = await http.get(
       Config.identityApiUrl.replace(path: '/authorized'),
-      headers: {'Authorization': getBearer() ?? ''},
+      headers: {'Authorization': bearer ?? ''},
     );
 
     return response.statusCode == 200;
   }
 
   static void withAuthentication(BuildContext context, FutureOr<void> Function(BuildContext context) callback) async {
-    if (hasAccessToken()) {
+    if (hasAccessToken) {
       await callback(context);
     } else {
       await IdentityClient.authorize(context, onSuccess: callback);
