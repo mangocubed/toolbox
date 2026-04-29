@@ -12,13 +12,7 @@ impl<T> OrValidationErrors<T> for Option<T> {
     }
 }
 
-impl<T> OrValidationErrors<T> for Result<T, std::io::Error> {
-    fn or_validation_errors(self) -> ValidationResult<T> {
-        self.map_err(|_| Default::default())
-    }
-}
-
-impl<T> OrValidationErrors<T> for Result<T, sqlx::Error> {
+impl<T, E> OrValidationErrors<T> for Result<T, E> {
     fn or_validation_errors(self) -> ValidationResult<T> {
         self.map_err(|_| Default::default())
     }
