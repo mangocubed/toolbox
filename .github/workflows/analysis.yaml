@@ -18,7 +18,14 @@ jobs:
             - name: Check with cargo-fmt
               run: cargo fmt --all --check
             - name: Check with cargo-clippy
-              run: cargo clippy --all-features -- -D warnings
+              run: |
+                  cargo clippy --all-features -- -D warnings
+                  cargo clippy --features axum -- -D warnings || failed
+                  cargo clippy --features graphql -- -D warnings || failed
+                  cargo clippy --features identity-client -- -D warnings || failed
+                  cargo clippy --features mailer -- -D warnings || failed
+                  cargo clippy --features rand -- -D warnings || failed
+                  cargo clippy --features validator -- -D warnings || failed
 
     check_flutter:
         runs-on: ubuntu-24.04

@@ -20,12 +20,12 @@ pub(crate) struct CacheConfig {
     #[envconfig(from = "CACHE_REDIS_URL", default = "redis://127.0.0.1:6379/0")]
     pub redis_url: String,
     #[envconfig(from = "CACHE_TTL_SECS", default = "3600")]
-    ttl_secs: u16,
+    ttl_secs: u64,
 }
 
 impl CacheConfig {
     pub fn ttl(&self) -> Duration {
-        Duration::from_secs(self.ttl_secs as u64)
+        Duration::from_secs(self.ttl_secs)
     }
 }
 
