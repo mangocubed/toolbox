@@ -22,6 +22,7 @@ lettre = { version = "0.11", features = [
     "smtp-transport",
     "tokio1-native-tls",
 ], optional = true }
+rand = { version = "0.10", optional = true }
 reqwest = { version = "0.13", features = ["json"], optional = true }
 sentry = { version = "0.48", features = ["logs", "tracing"] }
 serde = { version = "1.0", features = ["derive"] }
@@ -37,4 +38,5 @@ axum = ["dep:axum", "dep:axum-extra", "dep:serde_json"]
 graphql = ["dep:async-graphql"]
 identity-client = ["dep:reqwest", "dep:chrono", "dep:url"]
 mailer = ["dep:anyhow", "dep:lettre"]
+rand = ["dep:rand"]
 validator = ["dep:validator"]

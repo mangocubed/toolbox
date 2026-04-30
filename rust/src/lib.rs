@@ -13,5 +13,7 @@ pub mod graphql;
 pub mod identity_client;
 #[cfg(feature = "mailer")]
 pub mod mailer;
+#[cfg(feature = "rand")]
+pub mod rand;
 #[cfg(feature = "validator")]
 pub mod validator;
