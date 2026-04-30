@@ -1,6 +1,5 @@
 pub mod cache;
 pub mod config;
-pub mod pagination;
 pub mod tracing;
 
 #[cfg(feature = "axum")]
@@ -13,6 +12,8 @@ pub mod graphql;
 pub mod identity_client;
 #[cfg(feature = "mailer")]
 pub mod mailer;
+#[cfg(feature = "pagination")]
+pub mod pagination;
 #[cfg(feature = "rand")]
 pub mod rand;
 #[cfg(feature = "validator")]

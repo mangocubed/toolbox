@@ -24,6 +24,7 @@ jobs:
                   cargo clippy --features graphql -- -D warnings || failed
                   cargo clippy --features identity-client -- -D warnings || failed
                   cargo clippy --features mailer -- -D warnings || failed
+                  cargo clippy --features pagination -- -D warnings || failed
                   cargo clippy --features rand -- -D warnings || failed
                   cargo clippy --features validator -- -D warnings || failed
 
