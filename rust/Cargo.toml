@@ -30,13 +30,14 @@ serde_json = { version = "1.0", optional = true }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 url = { version = "2.5", features = ["serde"], optional = true }
-uuid = { version = "1.23", features = ["serde"] }
+uuid = { version = "1.23", features = ["serde"], optional = true }
 validator = { version = "0.20", optional = true }
 
 [features]
 axum = ["dep:axum", "dep:axum-extra", "dep:serde_json"]
-graphql = ["dep:async-graphql"]
-identity-client = ["dep:reqwest", "dep:chrono", "dep:url"]
+graphql = ["dep:async-graphql", "dep:uuid"]
+identity-client = ["dep:reqwest", "dep:chrono", "dep:url", "dep:uuid"]
 mailer = ["dep:anyhow", "dep:lettre"]
+pagination = ["dep:uuid"]
 rand = ["dep:rand"]
 validator = ["dep:validator"]
